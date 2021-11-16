@@ -11,6 +11,9 @@ Objective is to take an agile approach for collaboration.
   All merges to master must be submitted via PR requests and approvals.
 - dev: Corresponding branch for pre-production development and testing.
   Intended to serve as feature and performance comparison to the production instance.
+
+** Collaboration Branches
+
 - author/X: In order to maintain agility, it's preferable to develop under corresponding author branches and merge to either main or dev, as needed.
   In this context, the author value is replaced by the author name (i.e. jmolina), followed by X feature or hotfix.
 
