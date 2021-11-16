@@ -1,3 +1,5 @@
 #+TITLE: SaaS Appliction with Gin.
 
-* TODO - Update README
+* Objective
+
+Build a SaaS application written in Go using Gin.
