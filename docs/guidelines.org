@@ -1,0 +1,25 @@
+#+TITLE: Guidelines
+
+* Source Control
+Standards for maintaining this project via source control in GitHub.
+Objective is to take an agile approach for collaboration.
+
+** Primary Project Branches
+
+- main: Corresponding branch for production code.
+  No direct commits to the main branch should be performed.
+  All merges to master must be submitted via PR requests and approvals.
+- dev: Corresponding branch for pre-production development and testing.
+  Intended to serve as feature and performance comparison to the production instance.
+- author/X: In order to maintain agility, it's preferable to develop under corresponding author branches and merge to either main or dev, as needed.
+  In this context, the author value is replaced by the author name (i.e. jmolina), followed by X feature or hotfix.
+
+  #+begin_example
+  # jesse molina's new feature for adding recipes.
+jmolina/feature-addrecipes
+  #+end_example
+
+  #+begin_example
+  # jesse molina's hot fix for db crash.
+jmolina/hotfix-dbcrash
+  #+end_example
