@@ -1,10 +1,10 @@
-#+TITLE: Guidelines
+#+TITLE: Project Guidelines
 
 * Source Control
 Standards for maintaining this project via source control in GitHub.
 Objective is to take an agile approach for collaboration.
 
-** Primary Project Branches
+** Primary Branches
 
 - main: Corresponding branch for production code.
   No direct commits to the main branch should be performed.
