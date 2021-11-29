@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"time"
 
@@ -21,6 +23,7 @@ type Recipe struct {
 	PublishedAt time.Time `json:"publishedAt"`
 }
 
+// handle POST new recipe
 func NewRecipeHandler(c *gin.Context) {
 	var recipe Recipe
 	if err := c.ShouldBindJSON(&recipe); err != nil {
@@ -34,13 +37,17 @@ func NewRecipeHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, recipe)
 }
 
+// handle GET recipes
 func ListRecipesHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, recipes)
 }
 
+// initialize recipes from json file
 func init() {
 	// iniate recipe array
 	recipes = make([]Recipe, 0)
+	file, _ := ioutil.ReadFile("recipes.json")
+	_ = json.Unmarshal([]byte(file), &recipes)
 }
 
 func main() {
