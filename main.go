@@ -66,6 +66,28 @@ func UpdateRecipeHandler(c *gin.Context) {
 	recipes[index] = recipe
 }
 
+// handle DELETE recipes
+func DeleteRecipeHandler(c *gin.Context) {
+	id := c.Param("id")
+
+	index := -1
+	for i := 0; i < len(recipes); i++ {
+		if recipes[i].ID == id {
+			index = i
+			break
+		}
+	}
+
+	if index == -1 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Recipe not found"})
+		return
+	}
+
+	recipes = append(recipes[:index], recipes[index+1:]...)
+
+	c.JSON(http.StatusOK, gin.H{"message": "Recipe has been deleted"})
+}
+
 // initialize recipes from json file
 func init() {
 	// iniate recipe array
