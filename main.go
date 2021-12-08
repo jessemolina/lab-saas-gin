@@ -1,3 +1,19 @@
+// Recipes API
+//
+// Example Recipes API
+//
+//  Schemes: http
+//  Host: localhost:8080
+//  BasePath: /
+//  Version: 1.0.0
+//  Contact: Jesse Molina <jesse@jessemolina.xyz> https://jessemolina.xyz
+//
+//  Consumes:
+//  - application/json
+//
+//  Produces:
+//  - application/json
+// swagger:meta
 package main
 
 import (
