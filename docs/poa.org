@@ -1,0 +1,178 @@
+#+TITLE: SAAS Application with Gin - Plan of Action
+
+* Container Set Up
+:PROPERTIES:
+:header-args: :dir ../
+:END:
+*** Docker
+**** Images
+***** Go
+Pull golang docker image.
+
+#+begin_src sh
+docker pull golang:1.17
+#+end_src
+
+https://hub.docker.com/_/golang/
+
+#+RESULTS:
+| 1.17:                         | Pulling                                                                 | from     | library/golang |     |             |
+| 5e0b432e8ba9:                 | Pulling                                                                 | fs       | layer          |     |             |
+| a84cfd68b5ce:                 | Pulling                                                                 | fs       | layer          |     |             |
+| e8b8f2315954:                 | Pulling                                                                 | fs       | layer          |     |             |
+| 0598fa43a7e7:                 | Pulling                                                                 | fs       | layer          |     |             |
+| ae9442ff4ff8:                 | Pulling                                                                 | fs       | layer          |     |             |
+| eddb789cbb23:                 | Pulling                                                                 | fs       | layer          |     |             |
+| 0979aabbe4a4:                 | Pulling                                                                 | fs       | layer          |     |             |
+| eddb789cbb23:                 | Waiting                                                                 |          |                |     |             |
+| 0598fa43a7e7:                 | Waiting                                                                 |          |                |     |             |
+| 0979aabbe4a4:                 | Waiting                                                                 |          |                |     |             |
+| ae9442ff4ff8:                 | Waiting                                                                 |          |                |     |             |
+| a84cfd68b5ce:                 | Verifying                                                               | Checksum |                |     |             |
+| a84cfd68b5ce:                 | Download                                                                | complete |                |     |             |
+| e8b8f2315954:                 | Verifying                                                               | Checksum |                |     |             |
+| e8b8f2315954:                 | Download                                                                | complete |                |     |             |
+| 5e0b432e8ba9:                 | Download                                                                | complete |                |     |             |
+| 5e0b432e8ba9:                 | Pull                                                                    | complete |                |     |             |
+| a84cfd68b5ce:                 | Pull                                                                    | complete |                |     |             |
+| e8b8f2315954:                 | Pull                                                                    | complete |                |     |             |
+| 0598fa43a7e7:                 | Verifying                                                               | Checksum |                |     |             |
+| 0598fa43a7e7:                 | Download                                                                | complete |                |     |             |
+| 0979aabbe4a4:                 | Download                                                                | complete |                |     |             |
+| ae9442ff4ff8:                 | Verifying                                                               | Checksum |                |     |             |
+| ae9442ff4ff8:                 | Download                                                                | complete |                |     |             |
+| eddb789cbb23:                 | Verifying                                                               | Checksum |                |     |             |
+| eddb789cbb23:                 | Download                                                                | complete |                |     |             |
+| 0598fa43a7e7:                 | Pull                                                                    | complete |                |     |             |
+| ae9442ff4ff8:                 | Pull                                                                    | complete |                |     |             |
+| eddb789cbb23:                 | Pull                                                                    | complete |                |     |             |
+| 0979aabbe4a4:                 | Pull                                                                    | complete |                |     |             |
+| Digest:                       | sha256:a83ce262aae35c84eae5df3e4298e62ac224672280b8cb6254134745c62595c9 |          |                |     |             |
+| Status:                       | Downloaded                                                              | newer    | image          | for | golang:1.17 |
+| docker.io/library/golang:1.17 |                                                                         |          |                |     |             |
+
+***** Mongo
+Pull mongodb docker image.
+
+#+begin_src sh
+docker pull mongo:4.4.3
+#+end_src
+
+https://hub.docker.com/_/mongo/
+https://www.mongodb.com/evolved#mdbfourfour
+
+***** Redis
+
+#+begin_src sh
+docker pull redis:6.0
+#+end_src
+
+#+RESULTS:
+| 6.0:                        | Pulling                                                                 | from     | library/redis |     |           |
+| e5ae68f74026:               | Pulling                                                                 | fs       | layer         |     |           |
+| 37c4354629da:               | Pulling                                                                 | fs       | layer         |     |           |
+| b065b1b1fa0f:               | Pulling                                                                 | fs       | layer         |     |           |
+| a2b1e36a893a:               | Pulling                                                                 | fs       | layer         |     |           |
+| 8fd753f9fab6:               | Pulling                                                                 | fs       | layer         |     |           |
+| b3cb1ccc49b3:               | Pulling                                                                 | fs       | layer         |     |           |
+| a2b1e36a893a:               | Waiting                                                                 |          |               |     |           |
+| 8fd753f9fab6:               | Waiting                                                                 |          |               |     |           |
+| b3cb1ccc49b3:               | Waiting                                                                 |          |               |     |           |
+| 37c4354629da:               | Verifying                                                               | Checksum |               |     |           |
+| 37c4354629da:               | Download                                                                | complete |               |     |           |
+| b065b1b1fa0f:               | Verifying                                                               | Checksum |               |     |           |
+| b065b1b1fa0f:               | Download                                                                | complete |               |     |           |
+| 8fd753f9fab6:               | Verifying                                                               | Checksum |               |     |           |
+| 8fd753f9fab6:               | Download                                                                | complete |               |     |           |
+| a2b1e36a893a:               | Verifying                                                               | Checksum |               |     |           |
+| a2b1e36a893a:               | Download                                                                | complete |               |     |           |
+| e5ae68f74026:               | Download                                                                | complete |               |     |           |
+| b3cb1ccc49b3:               | Verifying                                                               | Checksum |               |     |           |
+| b3cb1ccc49b3:               | Download                                                                | complete |               |     |           |
+| e5ae68f74026:               | Pull                                                                    | complete |               |     |           |
+| 37c4354629da:               | Pull                                                                    | complete |               |     |           |
+| b065b1b1fa0f:               | Pull                                                                    | complete |               |     |           |
+| a2b1e36a893a:               | Pull                                                                    | complete |               |     |           |
+| 8fd753f9fab6:               | Pull                                                                    | complete |               |     |           |
+| b3cb1ccc49b3:               | Pull                                                                    | complete |               |     |           |
+| Digest:                     | sha256:41db4b66944d7256fd5aa22ab2d320248ead5ed63bab4f5bd7ba6c3578a9bae9 |          |               |     |           |
+| Status:                     | Downloaded                                                              | newer    | image         | for | redis:6.0 |
+| docker.io/library/redis:6.0 |                                                                         |          |               |     |           |
+
+https://hub.docker.com/_/redis
+
+***** Review
+Review docker images.
+
+#+begin_src sh
+docker images
+#+end_src
+
+#+RESULTS:
+| REPOSITORY                  | TAG               | IMAGE        | ID | CREATED | SIZE |        |
+| golang                      | 1.17              | 2e7da682bb63 |  5 | days    | ago  | 941MB  |
+| redis                       | 6.0               | 62ef09cc79c5 |  6 | days    | ago  | 112MB  |
+| kindest/node                | <none>            | 32b8b755dee8 |  6 | months  | ago  | 1.12GB |
+| mongo                       | 4.4.3             | ca8e14b1fda6 | 10 | months  | ago  | 493MB  |
+
+**** Dockerfile
+***** Configuration
+#+begin_example Dockerfile
+FROM golang:1.17
+
+## IDEA - creat a user to run the service as
+## RUN useradd -m gopher
+
+## copy all content
+ADD . /app
+
+## change working directory
+WORKDIR /app
+
+## enable app port
+EXPOSE 8080
+
+## build go program
+RUN go build -o main .
+
+## run main program
+CMD ["/app/main"]
+#+end_example
+
+***** Build
+#+begin_src sh
+docker build -t jessemolina/gosaas:0.1.0 .
+#+end_src
+
+#+RESULTS:
+***** Push
+Push image to docker repo.
+#+begin_src sh
+docker push jessemolina/gosaas:0.1.0
+#+end_src
+*** Docker-Compose
+**** env
+
+basic variables for docker compose
+#+begin_example
+CONTAINER_NAME=gosaas
+CONTAINER_IMAGE=jessemolina/gosaas:0.1.0
+#+end_example
+
+**** docker-compose
+
+#+begin_example
+version: '3.6'
+
+services:
+    gosaas:
+        image: ${CONTAINER_IMAGE}
+        container_name: ${CONTAINER_NAME}
+        environment:
+            - APP_PATH=/app
+        ports:
+            - 8080:8080
+
+#+end_example
+* TODO - Basic Application
+* TODO - JWT Authentication
