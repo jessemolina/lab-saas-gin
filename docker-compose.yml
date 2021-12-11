@@ -1,0 +1,10 @@
+version: '3.6'
+
+services:
+    gosaas:
+        image: ${CONTAINER_IMAGE}
+        container_name: ${CONTAINER_NAME}
+        environment:
+            - APP_PATH=/app
+        ports:
+            - 8080:8080
